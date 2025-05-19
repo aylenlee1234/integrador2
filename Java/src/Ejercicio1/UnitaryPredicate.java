@@ -1,19 +1,31 @@
 package Ejercicio1;
 
 public class UnitaryPredicate implements Predicate {
-    private final UnitaryPredicateEnum op;
-    private final Predicate value;
+    private UnitaryPredicateEnum type;
+    private Predicate operand;
 
-    public UnitaryPredicate(UnitaryPredicateEnum op, Predicate value) {
-        this.op = op;
-        this.value = value;
+    public UnitaryPredicate(UnitaryPredicateEnum type, Predicate operand) {
+        this.type = type;
+        this.operand = operand;
     }
 
     @Override
     public boolean eval(int a) {
-        return switch (op) {
-            case IDENTITY -> value.eval(a);
-            case NOT -> !value.eval(a);
-        };
+        switch (type) {
+            case IDENTITY:
+                return operand.eval(a);
+            case NOT:
+                return !operand.eval(a);
+            default:
+                throw new IllegalStateException("Unexpected type: " + type);
+        }
+    }
+
+    public Predicate getOperand() {
+        return operand;
+    }
+
+    public UnitaryPredicateEnum getType() {
+        return type;
     }
 }

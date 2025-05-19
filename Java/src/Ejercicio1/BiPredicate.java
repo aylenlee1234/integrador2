@@ -1,22 +1,38 @@
 package Ejercicio1;
 
 public class BiPredicate implements Predicate {
-    private final BiPredicateEnum op;
-    private final Predicate left;
-    private final Predicate right;
+    private BiPredicateEnum type;
+    private Predicate left;
+    private Predicate right;
 
-    public BiPredicate(BiPredicateEnum op, Predicate left, Predicate right) {
-        this.op = op;
+    public BiPredicate(BiPredicateEnum type, Predicate left, Predicate right) {
+        this.type = type;
         this.left = left;
         this.right = right;
     }
 
     @Override
     public boolean eval(int a) {
-        return switch (op) {
-            case AND -> left.eval(a) && right.eval(a);
-            case OR -> left.eval(a) || right.eval(a);
-        };
+        switch (type) {
+            case AND:
+                return left.eval(a) && right.eval(a);
+            case OR:
+                return left.eval(a) || right.eval(a);
+            default:
+                throw new IllegalStateException("Unexpected type: " + type);
+        }
+    }
+
+    public Predicate getLeft() {
+        return left;
+    }
+
+    public Predicate getRight() {
+        return right;
+    }
+
+    public BiPredicateEnum getType() {
+        return type;
     }
 }
 

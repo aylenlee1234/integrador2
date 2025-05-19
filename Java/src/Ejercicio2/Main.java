@@ -7,14 +7,20 @@ import Ejercicio1.Predicate;
 
 public class Main {
     public static void main(String[] args) {
-        Predicate p = new AtomicPredicate(3); // conjunto {3}
-        Predicate p2 = new AtomicPredicate(5); // conjunto {5}
-        Predicate union = new BiPredicate(BiPredicateEnum.OR, p, p2); // {3, 5}
-        PredicateSetttt set = new PredicateSetttt(union);
+        System.out.println("\nEjercicio 2 - Pruebas de PredicateSet");
 
-        System.out.println(set.contains(3));  // true
-        System.out.println(set.contains(4));  // false
-        System.out.println(set.isEmpty());    // false
-        System.out.println(set.choose());     // 3 o 5
+        PredicateSet set = new PredicateSet();
+        set.add(10);
+        set.add(20);
+        set.add(30);
+
+        System.out.println("belongs(20): " + set.belongs(20));
+        System.out.println("belongs(5): " + set.belongs(5));
+
+        set.remove(20);
+        System.out.println("belongs(20) después de remove: " + set.belongs(20));
+        System.out.println("isEmpty(): " + set.isEmpty());
+        System.out.println("choose(): " + set.choose());
+
     }
 }
