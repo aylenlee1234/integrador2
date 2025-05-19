@@ -19,3 +19,5 @@ public class BiPredicate implements Predicate {
         };
     }
 }
+
+//hola
